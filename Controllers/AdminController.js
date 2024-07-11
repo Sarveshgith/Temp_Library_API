@@ -21,7 +21,7 @@ const RegisterUser = async (req, res) => {
       );
     }
 
-    const UserExists = await Admin.findOne({ username });
+    const user = await Admin.findOne({ username });
 
     if (UserExists) {
       throw new DefinedError(
