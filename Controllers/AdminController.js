@@ -23,7 +23,7 @@ const RegisterUser = async (req, res) => {
 
     const user = await Admin.findOne({ username });
 
-    if (UserExists) {
+    if (user) {
       throw new DefinedError(
         404,
         "error",
