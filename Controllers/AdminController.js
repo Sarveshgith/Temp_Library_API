@@ -12,7 +12,7 @@ const RegisterUser = async (req, res) => {
   try {
     const { username, password, name } = req.body;
 
-    if (!username || !password || !name) {
+    if ([username, password, name].some(field => !field)) {
       throw new DefinedError(
         400,
         "error",
