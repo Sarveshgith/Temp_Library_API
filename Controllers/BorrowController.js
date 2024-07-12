@@ -1,12 +1,9 @@
 const Borrow = require("../Models/BorrowModel");
 const Book = require("../Models/BookModel");
 const Student = require("../Models/StudentModel");
-const { DateDifference } = require("../utils/DateDiff");
+const { DateDifference, DuePeriod, DueAmount } = require("../utils/DateDiff");
 const DefinedError = require("../Middleware/DefinedError");
 const { errHandle } = require("../Middleware/errHandle");
-
-const DuePeriod = 14;
-const DueAmount = 10; // per day
 
 const BorrowBooks = async (req, res) => {
   try {
