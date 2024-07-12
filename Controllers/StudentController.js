@@ -11,7 +11,7 @@ const RegisterUser = async (req, res) => {
   try {
     const { regno, password, name } = req.body;
 
-    if ([regno, password, name].some((field) => !field){
+    if ([regno, password, name].some(field => !field){
       throw new DefinedError(
         400,
         "error",
@@ -51,7 +51,7 @@ const LoginUser = async (req, res) => {
   try {
     const { regno, password } = req.body;
 
-    if ([regno, password].some((field) => !field) {
+    if ([regno, password].some(field => !field) {
       throw new DefinedError(
         400,
         "error",
