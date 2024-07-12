@@ -61,7 +61,7 @@ const LoginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    if (!username || !password) {
+    if ([username, password].some(field => !field)) {
       throw new DefinedError(
         400,
         "error",
