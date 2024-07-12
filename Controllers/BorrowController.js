@@ -1,7 +1,7 @@
 const Borrow = require("../Models/BorrowModel");
 const Book = require("../Models/BookModel");
 const Student = require("../Models/StudentModel");
-const { DateDifference, DuePeriod, DueAmount } = require("../utils/DateDiff");
+const { DueAmtCalc } = require("../utils/DateDiff");
 const DefinedError = require("../Middleware/DefinedError");
 const { errHandle } = require("../Middleware/errHandle");
 
@@ -92,14 +92,7 @@ const ReturnBooks = async (req, res) => {
 
     const borrowedAt = new Date(borrowedRecord.borrowedAt);
     const currentDate = new Date();
-    const diff = DateDifference(currentDate, borrowedAt);
-
-    console.log(`It's been ${diff} days since the book was borrowed!`);
-
-    let due = 0;
-    if (diff > DuePeriod) {
-      due = (diff - DuePeriod) * DueAmount;
-    }
+    const due = DueAmtCalc(currentDate, borrowedAt);
 
     await Borrow.deleteOne({ _id: borrowedRecord._id });
 
