@@ -119,6 +119,5 @@ const GetBook = async (req, res) => {
 module.exports = {
   RegisterUser,
   LoginUser,
-  GetBooks,
   GetBook,
 };
