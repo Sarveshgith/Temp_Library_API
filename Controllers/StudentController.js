@@ -89,27 +89,23 @@ const LoginUser = async (req, res) => {
   }
 };
 
-const GetBooks = async (req, res) => {
-  try {
-    const book = await Book.find();
-    return res.status(200).json(book);
-  } catch (err) {
-    errHandle(err, err instanceof DefinedError, "Book Cannot Retrieved", res);
-  }
-};
-
 const GetBook = async (req, res) => {
   const { title, author } = req.query;
 
   try {
-    const query = {};
-    if (title) query.title = new RegExp(title, "i");
-    if (author) query.author = new RegExp(author, "i");
-
-    const book = await Book.find({
-      $or: [{ title: query.title }, { author: query.author }],
-    });
-    return res.status(200).json(book);
+    let book;
+    if(author || title){
+      const query = {};
+      if (title) query.title = new RegExp(title, "i");
+      if (author) query.author = new RegExp(author, "i");
+        book = await Book.find({
+        $or: [{ title: query.title }, { author: query.author }],
+      });
+      return res.status(200).json(book);
+    } else{
+      book = await Book.find();
+      return res.status(200).json(book);
+    }
   } catch (error) {
     errHandle(
       error,
