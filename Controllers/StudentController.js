@@ -11,7 +11,7 @@ const RegisterUser = async (req, res) => {
   try {
     const { regno, password, name } = req.body;
 
-    if (!regno || !password || !name) {
+    if ([regno, password, name].some((field) => !field){
       throw new DefinedError(
         400,
         "error",
@@ -51,7 +51,7 @@ const LoginUser = async (req, res) => {
   try {
     const { regno, password } = req.body;
 
-    if (!regno || !password) {
+    if ([regno, password].some((field) => !field) {
       throw new DefinedError(
         400,
         "error",
@@ -98,7 +98,6 @@ const GetBooks = async (req, res) => {
   }
 };
 
-// /api/books?title=Harry%20Potter&author=J.K.Rowling
 const GetBook = async (req, res) => {
   const { title, author } = req.query;
 
