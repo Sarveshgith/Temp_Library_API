@@ -1,5 +1,8 @@
-function DateDifference(date1, date2){
+function DueAmtCalc(date1, date2){
 
+    const DuePeriod = 14;
+    const DueAmount = 10;
+    let due = 0;
     const dateM1 = new Date(date1).getTime();
     const dateM2 = new Date(date2).getTime();
 
@@ -7,10 +10,10 @@ function DateDifference(date1, date2){
 
     const diffday = Math.ceil(diffM / (1000 * 60 * 60 * 24));
 
-    return diffday;
+    if(diffday > DuePeriod){
+        due = (diffday - DuePeriod) * DueAmount;
+        
+    return due;
 };
-module.exports = {DateDifference};
-
-const export DuePeriod = 14;
-const export DueAmount = 10;
+module.exports = {DueAmtCalc};
 
