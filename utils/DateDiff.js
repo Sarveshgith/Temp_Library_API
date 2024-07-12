@@ -9,12 +9,5 @@ function DateDifference(date1, date2){
 
     return diffday;
 };
-
-// const date1 = "2024-06-01";
-// const date2 = "2024-06-10";
-
-// const daysDifference = DateDifference(date1, date2);
-// console.log(`The difference between ${date1} and ${date2} is ${daysDifference} days.`);
-
 module.exports = {DateDifference};
 
