@@ -9,7 +9,7 @@ const AddBook = async (req, res) => {
     console.log("Created Book: ", req.body);
     const { title, author } = req.body;
 
-    if (!title || !author) {
+    if ([title, author].some(field => !field)) {
       throw new DefinedError(
         400,
         "error",
@@ -25,7 +25,6 @@ const AddBook = async (req, res) => {
   }
 };
 
-// /api/book/Harry%20Potter
 const DelBook = async (req, res) => {
   try {
     const { title } = req.params;
