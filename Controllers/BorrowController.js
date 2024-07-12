@@ -12,7 +12,7 @@ const BorrowBooks = async (req, res) => {
   try {
     const { regno, bookId } = req.body;
 
-    if (!regno || !bookId) {
+    if ([regno, bookId].some(field => !field)) {
       throw new DefinedError(
         400,
         "error",
