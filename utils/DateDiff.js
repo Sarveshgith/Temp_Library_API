@@ -11,3 +11,6 @@ function DateDifference(date1, date2){
 };
 module.exports = {DateDifference};
 
+const export DuePeriod = 14;
+const export DueAmount = 10;
+
