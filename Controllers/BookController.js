@@ -9,7 +9,7 @@ const AddBook = async (req, res) => {
     console.log("Created Book: ", req.body);
     const { title, author } = req.body;
 
-    if ([title, author].some(field => !field)) {
+    if ([title, author].some((field) => !field)) {
       throw new DefinedError(
         400,
         "error",
@@ -27,8 +27,7 @@ const AddBook = async (req, res) => {
 
 const DelBook = async (req, res) => {
   try {
-    const { title } = req.params;
-    const book = await Book.findOne({ title });
+    const book = await Book.findById(req.params.id);
     if (!book) {
       throw new DefinedError(
         404,
@@ -37,7 +36,7 @@ const DelBook = async (req, res) => {
         "Book Not Deleted"
       );
     }
-    await Book.deleteOne({ title });
+    await Book.deleteOne({ _id: req.params.id });
     return res.status(200).json(book);
   } catch (error) {
     errHandle(error, error instanceof DefinedError, "Book Not Deleted", res);

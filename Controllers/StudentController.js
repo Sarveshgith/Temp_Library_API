@@ -11,7 +11,7 @@ const RegisterUser = async (req, res) => {
   try {
     const { regno, password, name } = req.body;
 
-    if ([regno, password, name].some(field => !field){
+    if ([regno, password, name].some((field) => !field)) {
       throw new DefinedError(
         400,
         "error",
@@ -51,7 +51,7 @@ const LoginUser = async (req, res) => {
   try {
     const { regno, password } = req.body;
 
-    if ([regno, password].some(field => !field) {
+    if ([regno, password].some((field) => !field)) {
       throw new DefinedError(
         400,
         "error",
@@ -78,7 +78,7 @@ const LoginUser = async (req, res) => {
       return res.status(200).json({ accessToken });
     } else {
       throw new DefinedError(
-        401,
+        403,
         "error",
         "Invalid Credantials",
         "User Cannot Login"
@@ -94,15 +94,15 @@ const GetBook = async (req, res) => {
 
   try {
     let book;
-    if(author || title){
+    if (author || title) {
       const query = {};
       if (title) query.title = new RegExp(title, "i");
       if (author) query.author = new RegExp(author, "i");
-        book = await Book.find({
+      book = await Book.find({
         $or: [{ title: query.title }, { author: query.author }],
       });
       return res.status(200).json(book);
-    } else{
+    } else {
       book = await Book.find();
       return res.status(200).json(book);
     }

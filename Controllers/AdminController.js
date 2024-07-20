@@ -12,7 +12,7 @@ const RegisterUser = async (req, res) => {
   try {
     const { username, password, name } = req.body;
 
-    if ([username, password, name].some(field => !field)) {
+    if ([username, password, name].some((field) => !field)) {
       throw new DefinedError(
         400,
         "error",
@@ -25,7 +25,7 @@ const RegisterUser = async (req, res) => {
 
     if (user) {
       throw new DefinedError(
-        404,
+        409,
         "error",
         "Admin Already Exists",
         "Admin Not Registered"
@@ -34,13 +34,13 @@ const RegisterUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await Admin.create({
+    const userFound = await Admin.create({
       username,
       password: hashedPassword,
       name,
     });
 
-    if (user) {
+    if (userFound) {
       return res.status(201).json({
         _id: user.id,
         username: user.username,
@@ -61,9 +61,9 @@ const LoginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    if ([username, password].some(field => !field)) {
+    if ([username, password].some((field) => !field)) {
       throw new DefinedError(
-        400,
+        422,
         "error",
         "Please Add All Fields",
         "Cannot Login"
@@ -88,7 +88,7 @@ const LoginUser = async (req, res) => {
       return res.status(200).json({ accessToken });
     }
     throw new DefinedError(
-      401,
+      403,
       "error",
       "Invalid Credantials",
       "Admin Not Registered"

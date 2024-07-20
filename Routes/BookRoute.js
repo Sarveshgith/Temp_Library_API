@@ -4,7 +4,6 @@ const router = express.Router();
 
 //router.use(ValidToken);
 router.post("/add", AddBook);
-router.delete("/remove", DelBook);
+router.delete("/remove/:id", DelBook);
 
 module.exports = router;
-
